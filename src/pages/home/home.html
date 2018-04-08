@@ -6,12 +6,28 @@
 
 <ion-content padding>
   <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-row>
+    <ion-col col-9>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="newStop" placeholder="New Shopping item"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <button ion-button (click)="addStop()">Add!</button>
+    </ion-col>
+  </ion-row>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let stop of busStops | async">
+      <ion-item>
+        {{ stop.$value }}
+      </ion-item>
+      <!-- <ion-item> -->
+      <ion-item-options side="right">
+        <button ion-button color="danger" icon-only (click)="removeStop(stop.$key)"><ion-icon name="trash"></ion-icon></button>
+        <!-- <button ion-button (click)="removeStop(stop.$key)">Remove!</button> -->
+      </ion-item-options>
+      <!-- </ion-item> -->
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

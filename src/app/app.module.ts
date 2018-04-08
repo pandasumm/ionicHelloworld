@@ -11,6 +11,22 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+// for firebase
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
+import { AngularFireModule } from 'angularfire2';
+import { FirebaseProvider } from './../providers/firebase/firebase';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCGu9TTnXfE5R1IIgnX4E7cEfoXIcm_L1k",
+  authDomain: "nextbus-6963e.firebaseapp.com",
+  databaseURL: "https://nextbus-6963e.firebaseio.com",
+  projectId: "nextbus-6963e",
+  storageBucket: "nextbus-6963e.appspot.com",
+  messagingSenderId: "229424620214"
+};
+
 @NgModule({
   declarations: [
     MyApp,
@@ -21,6 +37,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    HttpClientModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -34,7 +54,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    FirebaseProvider,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }
